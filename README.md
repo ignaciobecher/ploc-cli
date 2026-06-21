@@ -72,11 +72,15 @@ npm install -g github:ignaciobecher/ploc-cli
    ploc
    ```
 
-   Te va a pedir, una por una, las carpetas raíz donde tenés tus
-   proyectos (podés agregar varias — Documents, Desktop, una carpeta de
-   repos separada, un disco distinto, etc) y la profundidad de escaneo
-   (cuántos niveles de subcarpetas indexar bajo cada una). Con eso guarda
-   `~/.plocrc.json` y continúa con el comando que pediste.
+   El asistente detecta automáticamente carpetas típicas que ya existen
+   en tu sistema (Documents, Desktop, Downloads, y subcarpetas comunes
+   como `projects`, `repos`, `code`, `dev`, en español o inglés) y te las
+   muestra pre-seleccionadas en una lista de checkboxes — usá espacio
+   para tildar/destildar y Enter para confirmar. También podés agregar
+   rutas manualmente si lo que necesitás no apareció en la lista. Por
+   último te pide la profundidad de escaneo (cuántos niveles de
+   subcarpetas indexar bajo cada una). Con eso guarda `~/.plocrc.json` y
+   continúa con el comando que pediste.
 
    Este asistente solo se dispara una vez (mientras no exista el archivo
    de config). `ploc --help` y `ploc --version` nunca lo disparan.
