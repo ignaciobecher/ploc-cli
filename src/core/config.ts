@@ -8,7 +8,7 @@ import { printInfo, printError } from '../util/output.js';
 const CONFIG_PATH = path.join(os.homedir(), '.plocrc.json');
 export const CACHE_PATH = path.join(os.homedir(), '.ploc-cache.json');
 
-function defaultConfig(): ConfigFile {
+function fallbackConfig(): ConfigFile {
   const documents = path.join(os.homedir(), 'Documents');
   const baseDir = fs.existsSync(documents) ? documents : os.homedir();
   return {
@@ -17,6 +17,10 @@ function defaultConfig(): ConfigFile {
     scanDepth: 1,
     cacheTtlMinutes: 5,
   };
+}
+
+export function configExists(): boolean {
+  return fs.existsSync(CONFIG_PATH);
 }
 
 export function isValidConfig(value: unknown): value is ConfigFile {
@@ -31,13 +35,16 @@ export function isValidConfig(value: unknown): value is ConfigFile {
   );
 }
 
+/**
+ * Loads the config file. If it doesn't exist yet, callers are expected to
+ * have already run first-time setup (see commands/setup.ts) and written one
+ * via saveConfig — this only falls back silently for the "invalid file"
+ * recovery path, not for the "never configured" path.
+ */
 export function loadConfig(): ConfigFile {
   if (!fs.existsSync(CONFIG_PATH)) {
-    const config = defaultConfig();
+    const config = fallbackConfig();
     saveConfig(config);
-    printInfo(
-      `no config found, created ${CONFIG_PATH} with default base dir ${config.baseDirs[0]}. Run "ploc config add <path>" to add more.`
-    );
     return config;
   }
 
@@ -49,7 +56,7 @@ export function loadConfig(): ConfigFile {
     }
     return parsed;
   } catch {
-    const config = defaultConfig();
+    const config = fallbackConfig();
     saveConfig(config);
     printInfo(`config file at ${CONFIG_PATH} was invalid, reset to defaults.`);
     return config;

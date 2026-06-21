@@ -61,26 +61,32 @@ querés ayudar a llegar a ese punto.)
    ploc --version
    ```
 
-2. **Primera ejecución** — corré `ploc` sin argumentos para abrir el menú
-   interactivo. La primera vez crea automáticamente `~/.plocrc.json`
-   apuntando por defecto a tu carpeta `~/Documents`:
+2. **Primera ejecución** — corré cualquier comando de `ploc` (por ejemplo
+   `ploc` solo, o `ploc mi-proyecto`). Como todavía no existe
+   `~/.plocrc.json`, se abre automáticamente un asistente de configuración
+   interactivo:
 
    ```bash
    ploc
    ```
 
-   Vas a ver el banner de bienvenida y un mensaje confirmando que se creó
-   el archivo de configuración.
+   Te va a pedir, una por una, las carpetas raíz donde tenés tus
+   proyectos (podés agregar varias — Documents, Desktop, una carpeta de
+   repos separada, un disco distinto, etc) y la profundidad de escaneo
+   (cuántos niveles de subcarpetas indexar bajo cada una). Con eso guarda
+   `~/.plocrc.json` y continúa con el comando que pediste.
 
-3. **Apuntalo a tus carpetas de proyectos reales**:
+   Este asistente solo se dispara una vez (mientras no exista el archivo
+   de config). `ploc --help` y `ploc --version` nunca lo disparan.
+
+3. **¿Querés agregar más carpetas después?**
 
    ```bash
    ploc config add "C:\Users\tu-usuario\Documents\code"
    ```
 
-   Podés agregar tantos directorios base como quieras (Escritorio, una
-   carpeta de repos separada, etc) — corré `config add` de nuevo por cada
-   uno.
+   Corré `config add` de nuevo por cada directorio adicional que quieras
+   indexar.
 
 4. **Resolvé el nombre de una carpeta**:
 
@@ -198,6 +204,28 @@ corrés `ploc config add/remove/set-depth`. Usá `--refresh` o
   directorio base (por defecto `1` = solo subcarpetas directas).
 - `cacheTtlMinutes` — cuánto tiempo se mantiene válido el cache antes de
   un rescaneo automático.
+
+### ¿Cómo hago que `ploc` "busque en todo"?
+
+No existe una opción de "indexar todo el disco" — es intencional, porque
+escanear sin límites terminaría indexando `node_modules`, `.git`,
+`AppData`, etc., lo cual sería lento y ruidoso. En cambio, `ploc` combina
+**directorios base explícitos** + **profundidad acotada**:
+
+- Agregá cada carpeta raíz que te interese como base dir:
+  ```bash
+  ploc config add "C:\Users\tu-usuario\Documents\programacion"
+  ploc config add "D:\otros-proyectos"
+  ```
+- Si tenés proyectos anidados varios niveles (por ejemplo
+  `programacion/clientes/empresa-x/proyecto`), subí la profundidad:
+  ```bash
+  ploc config set-depth 3
+  ```
+
+Con un puñado de carpetas raíz bien elegidas y un `scanDepth` de 2-3 ya
+cubrís prácticamente cualquier estructura de proyectos sin indexar
+basura.
 
 ## Desarrollo
 
