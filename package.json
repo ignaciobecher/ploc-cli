@@ -1,6 +1,6 @@
 {
   "name": "ploc-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Resolve a project folder name to its absolute path for fast cd-ing.",
   "license": "MIT",
   "type": "module",
