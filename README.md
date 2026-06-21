@@ -236,6 +236,13 @@ npm test                       # corre los tests unitarios (matcher, cache, conf
 npm run build                  # compila TypeScript a dist/
 ```
 
+> **Importante**: `dist/` está commiteado al repo (no es un build artifact
+> ignorado). Esto es necesario porque `npm install -g github:...` no
+> instala `devDependencies` (incluido `typescript`), así que no hay forma
+> de compilar en la máquina de quien instala — el código compilado tiene
+> que venir ya listo en el repo. **Si modificás algo en `src/`, corré
+> `npm run build` y commiteá el `dist/` actualizado junto con el cambio.**
+
 Estructura del proyecto:
 
 ```

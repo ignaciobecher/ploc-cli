@@ -13,7 +13,6 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "dev": "tsx src/cli.ts",
-    "prepare": "npm run build",
     "test": "node --test --import tsx ./tests/*.test.ts"
   },
   "engines": {
