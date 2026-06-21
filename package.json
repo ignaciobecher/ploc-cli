@@ -1,0 +1,33 @@
+{
+  "name": "ploc",
+  "version": "1.0.0",
+  "description": "Resolve a project folder name to its absolute path for fast cd-ing.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "ploc": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/cli.ts",
+    "prepare": "npm run build",
+    "test": "node --test --import tsx ./tests/*.test.ts"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "commander": "15.0.0",
+    "fuse.js": "7.4.2",
+    "@inquirer/prompts": "8.5.2",
+    "chalk": "5.6.2"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3",
+    "@types/node": "26.0.0",
+    "tsx": "4.22.4"
+  }
+}
