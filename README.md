@@ -8,6 +8,8 @@
 █      █████   ████   ████ 
 ```
 
+[![npm version](https://img.shields.io/npm/v/ploc-cli.svg)](https://www.npmjs.com/package/ploc-cli)
+
 Resuelve el nombre de una carpeta de proyecto a su ruta absoluta. Pensado
 para `cd $(ploc <nombre>)`.
 
@@ -17,14 +19,14 @@ el `cd` real.
 
 ## Instalación
 
-La opción de menor fricción hoy es instalar directo desde GitHub — no
-requiere cuenta de npm ni publicar nada, solo tener Node.js:
+La forma más simple y confiable es instalar desde el registro de npm:
 
 ```bash
-npm install -g github:ignaciobecher/ploc-cli
+npm install -g ploc-cli
 ```
 
-Eso deja el comando `ploc` disponible globalmente en tu PATH.
+Eso deja el comando `ploc` disponible globalmente en tu PATH (el nombre
+del paquete es `ploc-cli`, pero el comando que escribís es `ploc`).
 
 ### Alternativa: clonar y enlazar
 
@@ -38,16 +40,16 @@ npm run build
 npm link        # deja `ploc` disponible globalmente
 ```
 
-### A futuro: registro de npm
-
-Cuando se publique, instalar será tan simple como:
+### Instalar directo desde GitHub
 
 ```bash
-npm install -g ploc
+npm install -g github:ignaciobecher/ploc-cli
 ```
 
-(Todavía no está publicado — ver [Cómo contribuir](#cómo-contribuir) si
-querés ayudar a llegar a ese punto.)
+> En algunos entornos Windows, `npm install -g github:...` puede fallar o
+> instalar el paquete vacío por un bug de npm al empaquetar
+> dependencias de git para instalaciones globales. Si te pasa, usá la
+> instalación por registro o por clone+link de arriba.
 
 ## Requisitos
 
@@ -242,6 +244,19 @@ npm run build                  # compila TypeScript a dist/
 > de compilar en la máquina de quien instala — el código compilado tiene
 > que venir ya listo en el repo. **Si modificás algo en `src/`, corré
 > `npm run build` y commiteá el `dist/` actualizado junto con el cambio.**
+
+### Publicar una nueva versión
+
+```bash
+npm version patch   # o minor / major, según el cambio
+npm run build
+npm publish
+git push --follow-tags
+```
+
+`npm publish` requiere estar logueado (`npm login`) y, si la cuenta tiene
+2FA habilitado, va a pedir el código de un solo uso al momento de
+publicar.
 
 Estructura del proyecto:
 

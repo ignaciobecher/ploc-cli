@@ -1,11 +1,15 @@
 {
-  "name": "ploc",
+  "name": "ploc-cli",
   "version": "1.0.0",
   "description": "Resolve a project folder name to its absolute path for fast cd-ing.",
   "license": "MIT",
   "type": "module",
   "bin": {
-    "ploc": "./dist/cli.js"
+    "ploc": "dist/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ignaciobecher/ploc-cli.git"
   },
   "files": [
     "dist"
