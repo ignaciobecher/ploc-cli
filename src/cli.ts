@@ -2,7 +2,7 @@
 import { Command } from 'commander';
 import { runResolve } from './commands/resolve.js';
 import { runRefresh } from './commands/refresh.js';
-import { runInteractive } from './commands/interactive.js';
+import { runMenu } from './commands/menu.js';
 import { runConfigList, runConfigAdd, runConfigRemove, runConfigSetDepth } from './commands/config.js';
 import { printError } from './util/output.js';
 
@@ -19,7 +19,7 @@ program
       if (query) {
         runResolve(query, opts);
       } else {
-        await runInteractive();
+        await runMenu();
       }
     } catch (err) {
       printError(err instanceof Error ? err.message : String(err));

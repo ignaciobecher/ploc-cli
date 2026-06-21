@@ -5,7 +5,7 @@ import { rankAll } from '../core/matcher.js';
 import { printResult } from '../util/output.js';
 import type { FolderEntry } from '../types.js';
 
-export async function runInteractive(): Promise<void> {
+export async function runSearch(): Promise<void> {
   const config = loadConfig();
   const entries = getEntries(config);
 
